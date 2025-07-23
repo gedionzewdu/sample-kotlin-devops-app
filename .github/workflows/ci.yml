@@ -9,12 +9,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
+
+      - name: Grant execute permission for Gradle
+        run: chmod +x ./gradlew
+        working-directory: app
+
       - name: Build with Gradle
-        run: |
-          cd app
-          ./gradlew build
+        run: ./gradlew build
+        working-directory: app
